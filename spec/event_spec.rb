@@ -27,21 +27,31 @@ describe Event do
     end
   end
 
-  describe '.this_week' do
-    it 'lists the events upcoming for this month' do
+  describe '.nth_week' do
+    it 'lists the events upcoming for any month' do
       event1 = Event.create(:description => "old event", :start_date => "2014/03/30 19:30:00")
       event2 = Event.create(:description => "2nd old event", :start_date => "2014/03/31 19:35:00")
       event3 = Event.create(:description => "3rd old event", :start_date => "2014/04/25 19:35:00")
-      Event.this_week.should eq [event1, event2]
+      Event.nth_week.should eq [event1, event2]
     end
   end
 
-  describe '.this_month' do
-    it 'lists the events upcoming for this month' do
+  describe '.nth_month' do
+    it 'lists the events upcoming for any month' do
       event1 = Event.create(:description => "old event", :start_date => "2014/03/30 19:30:00")
       event2 = Event.create(:description => "2nd old event", :start_date => "2014/04/16 19:35:00")
       event3 = Event.create(:description => "3rd old event", :start_date => "2014/05/25 19:35:00")
-      Event.this_month.should eq [event1, event2]
+      Event.nth_month.should eq [event1, event2]
     end
   end
+
+  describe '.nth_year' do
+    it 'lists the events upcoming for any year' do
+      event1 = Event.create(:description => "old event", :start_date => "2014/03/30 19:30:00")
+      event2 = Event.create(:description => "2nd old event", :start_date => "2015/02/16 19:35:00")
+      event3 = Event.create(:description => "3rd old event", :start_date => "2018/05/25 19:35:00")
+      Event.nth_year.should eq [event1, event2]
+    end
+  end
+
 end

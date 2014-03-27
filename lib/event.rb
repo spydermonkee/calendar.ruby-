@@ -15,14 +15,20 @@ class Event < ActiveRecord::Base
     results
   end
 
-  def self.this_week
+  def self.nth_week(n=0)
     events = self.upcoming_events
-    events.select { |event| event.start_date.between?(Date.yesterday, Date.today + 6) }
+    events.select { |event| event.start_date.between?(Date.yesterday + (n*7), Date.today + ((n*7)+7)) }
   end
 
-  def self.this_month
+  def self.nth_month(n=0)
     events = self.upcoming_events
-    events.select { |event| event.start_date.between?(Date.yesterday, Date.today + 30) }
+    events.select { |event| event.start_date.between?(Date.yesterday+(n*7), Date.today + ((n*30)+30)) }
   end
+
+  def self.nth_year(n=0)
+    events = self.upcoming_events
+    events.select { |event| event.start_date.between?(Date.yesterday+(n*7), Date.today + 365 + (n * 365)) }
+  end
+
 end
 

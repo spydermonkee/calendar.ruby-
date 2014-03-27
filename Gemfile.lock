@@ -64,7 +64,10 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.1)
       atomic (>= 1.1.7, < 2)
+    timeliness (0.3.7)
     tzinfo (0.3.39)
+    validates_timeliness (3.0.14)
+      timeliness (~> 0.3.6)
 
 PLATFORMS
   ruby
@@ -77,3 +80,4 @@ DEPENDENCIES
   rake
   rspec
   shoulda-matchers
+  validates_timeliness

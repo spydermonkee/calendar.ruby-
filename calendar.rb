@@ -83,36 +83,31 @@ def add_menu
 end
 
 def list_menu
-  puts "do you want to see your upcoming calendar by all, today, this week, or this month?"
-  view_choice = gets.chomp.downcase
-  case view_choice
+  puts "do you want to see your upcoming calendar by all, today, week, month, or year?"
+  choice = gets.chomp.downcase
+  case choice
   when 'all'
-    all
+    view_choice("upcoming_events")
   when 'today'
-    Event.today.each { |event| puts "#{event.description}: #{event.start_date.month} #{event.start_date.day} #{event.start_date.year}" }
-    puts "Enter any key to go back to main menu."
-    gets.chomp
-    main_menu
-  when 'this week'
-    this_week
-  when 'this month'
-    this_month
+    view_choice("today")
+  when 'week'
+    view_choice("this_week")
+  when 'month'
+    view_choice("this_month")
+  when 'year'
+    view_choice("this_year")
   else
-    puts 'Please enter a vlid choice'
+    puts 'Please enter a valid choice'
     list_menu
   end
 end
-  def all
-    puts "Here are your upcoming events:"
-    upcoming_events = Event.upcoming_events
-    upcoming_events.each { |event| puts "#{event.description}: #{event.start_date.month} #{event.start_date.day} #{event.start_date.year}" }
-    puts "Enter any key to go back to main menu."
-    gets.chomp
-    main_menu
-  end
 
-
-
+def view_choice(choice)
+  Event.send(choice).each { |event| puts "#{(event.start_date).to_formatted_s(:long_ordinal)}" }
+  puts "Enter any key to go back to main menu."
+  gets.chomp
+  main_menu
 end
+
 
 welcome

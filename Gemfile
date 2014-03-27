@@ -5,6 +5,7 @@ gem 'active_record_migrations'
 gem 'rake'
 gem 'pg'
 gem 'pry'
+gem 'validates_timeliness'
 
 group :test do
   gem 'rspec'
