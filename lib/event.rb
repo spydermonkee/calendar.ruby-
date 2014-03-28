@@ -22,12 +22,17 @@ class Event < ActiveRecord::Base
 
   def self.nth_month(n=0)
     events = self.upcoming_events
-    events.select { |event| event.start_date.between?(Date.yesterday+(n*7), Date.today + ((n*30)+30)) }
+    events.select { |event| event.start_date.between?(Date.yesterday+(n*30), Date.today + ((n*30)+30)) }
   end
 
   def self.nth_year(n=0)
     events = self.upcoming_events
-    events.select { |event| event.start_date.between?(Date.yesterday+(n*7), Date.today + 365 + (n * 365)) }
+    events.select { |event| event.start_date.between?(Date.yesterday+(n*365), Date.today + 365 + (n * 365)) }
+  end
+
+  def self.view_next(view_date, date_variable)
+    events = Event.all
+    events.select { |event| event.start_date.send(date_variable).between?(view_date.send(date_variable) + 1, view_date.send(date_variable) + 2)}
   end
 
 end
